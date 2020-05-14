@@ -2,6 +2,7 @@
   padding: 10px 0px;
   border-radius: 10px;
   background-color: beige;
+  box-shadow: 0 0 10px 0 #999;
   .category-content {
     display: flex;
     flex-direction: row;
@@ -16,6 +17,7 @@
     .category-title {
       margin: auto 0px;
       font-size: 12px;
+      text-transform: uppercase;
       font-weight: 700;
       white-space: nowrap;
       overflow: hidden;
