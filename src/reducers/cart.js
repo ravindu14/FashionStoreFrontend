@@ -57,13 +57,18 @@ function editCartItems(state: CartStateType, { productCode, action }) {
       if (action === "increase") {
         return {
           ...item,
-          quantity: parseFloat(item.quantity) + 1,
+          buyQuantity:
+            parseFloat(item.buyQuantity) < parseFloat(item.quantity)
+              ? parseFloat(item.buyQuantity) + 1
+              : parseFloat(item.buyQuantity),
         };
       } else {
         return {
           ...item,
-          quantity:
-            parseFloat(item.quantity) > 0 ? parseFloat(item.quantity) - 1 : 0,
+          buyQuantity:
+            parseFloat(item.buyQuantity) > 0
+              ? parseFloat(item.buyQuantity) - 1
+              : 0,
         };
       }
     }

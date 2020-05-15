@@ -3,6 +3,7 @@
   border-radius: 10px;
   background-color: beige;
   box-shadow: 0 0 10px 0 #999;
+  cursor: pointer;
   .category-content {
     display: flex;
     flex-direction: row;
@@ -23,9 +24,6 @@
       overflow: hidden;
       color: rgb(17, 17, 17);
     }
-  }
-  a {
-    text-decoration: none;
   }
 }
 .color1 {

@@ -63,7 +63,7 @@ class WishlistPage extends Component<WishlistPageProps> {
                                 onClickCart={() =>
                                   this.props.addToCart({
                                     ...product,
-                                    quantity: 1,
+                                    buyQuantity: 1,
                                   })
                                 }
                                 onClickWishList={() =>

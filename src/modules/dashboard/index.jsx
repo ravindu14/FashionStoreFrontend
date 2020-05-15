@@ -38,6 +38,23 @@ class HomePage extends Component<HomePageProps> {
     this.props.getAllProducts();
   }
 
+  searchProducts = (name) => {
+    this.props.getAllProducts({ category: name });
+  };
+
+  getRating = (rating) => {
+    let rate = 0;
+
+    if (rating && rating.length > 0) {
+      rating.map((val) => {
+        rate += parseFloat(val);
+        return null;
+      });
+      rate = Math.round(rate / rating.length);
+    }
+    return rate;
+  };
+
   render() {
     const {
       productStatus,
@@ -68,7 +85,6 @@ class HomePage extends Component<HomePageProps> {
                   <div className="top-categories-section">
                     <div className="section-header-container">
                       <div className="section-header">Categories</div>
-                      <span className="view-all">*</span>
                     </div>
                     <div className={"mini-category-container"}>
                       {categoryStatus === ASYNC_STATUS.LOADING ? (
@@ -78,6 +94,9 @@ class HomePage extends Component<HomePageProps> {
                         categories.map(({ category_name, color }, index) => {
                           return (
                             <CategoryCard
+                              onClickCard={() =>
+                                this.searchProducts(category_name)
+                              }
                               key={index}
                               title={category_name}
                               color={"color2"}
@@ -95,7 +114,6 @@ class HomePage extends Component<HomePageProps> {
                   <div className="new-arrivals-section">
                     <div className="section-header-container">
                       <div className="section-header">Products</div>
-                      <span className="view-all">*</span>
                     </div>
                     <div className={"mini-new-arrivals-container"}>
                       {productStatus === ASYNC_STATUS.LOADING ? (
@@ -109,7 +127,7 @@ class HomePage extends Component<HomePageProps> {
                               title={product.productName}
                               image={ImagePlaceHolder}
                               prices={parseFloat(product.price).toFixed(2)}
-                              rating={{ rate: 4, reviews: 10 }}
+                              rating={{ rate: this.getRating(product.rating) }}
                             />
                           );
                         })

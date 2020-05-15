@@ -22,100 +22,11 @@ class CartForm extends PureComponent<CartProps> {
     super(props);
 
     //$FlowFixMe
-    this.focusTextInput = this.focusTextInput.bind(this);
-    //$FlowFixMe
     this.handleCartModal = this.handleCartModal.bind(this);
-    //$FlowFixMe
-    this.disableInput = this.disableInput.bind(this);
-    //$FlowFixMe
-    this.removeProducts = this.removeProducts.bind(this);
-    //$FlowFixMe
-    this.changeItemQuantity = this.changeItemQuantity.bind(this);
-  }
-
-  focusTextInput(productCode) {
-    const { disabled } = this.state;
-
-    const updatedInputList = disabled.map((field) => {
-      if (productCode === field.id) {
-        return {
-          ...field,
-          disable: false,
-        };
-      }
-      return {
-        ...field,
-      };
-    });
-
-    this.setState(
-      {
-        ...this.state,
-        disabled: [...updatedInputList],
-      },
-      () => this[`${productCode}-ref`].current.focus()
-    );
-  }
-
-  disableInput(selectedProductCode) {
-    const { editCartItems, cartItems } = this.props;
-    const { disabled } = this.state;
-
-    const updatedProduct = cartItems.filter(({ product }) => {
-      return product.productCode === selectedProductCode;
-    });
-
-    editCartItems(
-      {
-        product: [
-          {
-            productCode: updatedProduct[0].product.productCode,
-            productTenantId: updatedProduct[0].product.productTenantId,
-            quantity: updatedProduct[0].quantity,
-            shippingCountry: updatedProduct[0].shippingCountry,
-            shippingCost: updatedProduct[0].shippingCost,
-            price: updatedProduct[0].price,
-          },
-        ],
-      },
-      { page: 1, pageSize: 50 }
-    );
-
-    const updatedInputList = disabled.map((field) => {
-      if (selectedProductCode === field.id) {
-        return {
-          ...field,
-          disable: true,
-        };
-      }
-      return {
-        ...field,
-      };
-    });
-
-    this.setState({
-      ...this.state,
-      disabled: [...updatedInputList],
-    });
   }
 
   handleCartModal() {
     this.props.handleCart();
-  }
-
-  removeProducts(productCode, tenantId) {
-    const { removeCartItems } = this.props;
-
-    removeCartItems(
-      { productCode: productCode, productTenantId: tenantId },
-      { page: 1, pageSize: 50 }
-    );
-  }
-
-  changeItemQuantity(productCode, value) {
-    const { onEditCArtItems } = this.props;
-
-    onEditCArtItems({ productCode, value: value.target.value });
   }
 
   render() {
@@ -187,7 +98,7 @@ class CartForm extends PureComponent<CartProps> {
                                   -
                                 </div>
                                 <div className="detail-show">
-                                  {item.quantity}
+                                  {item.buyQuantity}
                                 </div>
                                 <div
                                   className="detail-increase"

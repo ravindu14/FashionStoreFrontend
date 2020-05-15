@@ -11,16 +11,16 @@ import Col from "components/Col";
 import Layout from "components/layout";
 import Loader from "components/loader";
 import Alert from "components/Alert";
+import Button from "components/button";
+import Checkbox from "components/checkbox";
+import Input from "components/Input";
+import uuid from "uuid";
 
 import { removeFromCart } from "action/cart";
 import { placeOrder, initOrder } from "action/product";
 import { ASYNC_STATUS } from "constants/async";
 
 import "./styles.scss";
-import Button from "components/button";
-import Checkbox from "components/checkbox";
-import Input from "components/Input";
-import uuid from "uuid";
 
 type OrderPageProps = {
   removeFromCart: Function,
